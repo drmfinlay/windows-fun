@@ -8,6 +8,7 @@ import time
 import ctypes
 import ctypes.wintypes
 import threading
+import six
 
 
 class ObservableWindowChange(object):
@@ -52,8 +53,9 @@ class WindowChangeEventListener(object):
     def listen_forever(self):        
         # This is to fix a problem with ascii encoding (windows with Unicode in
         # their titles)
-        reload(sys)
-        sys.setdefaultencoding('utf8')
+        if six.PY2:
+            reload(sys)
+            sys.setdefaultencoding('utf8')
 
         # Look here for DWORD event constants:
         # http://stackoverflow.com/questions/15927262/convert-dword-event-constant-from-wineventproc-to-name-in-c-sharp
@@ -150,4 +152,3 @@ if __name__ == '__main__':
             time.sleep(0.1)
         except KeyboardInterrupt:
             break
-
