@@ -9,6 +9,9 @@ __pycache__/
 # Backup files
 *~
 
+# Vim.
+*.swp
+
 # Distribution / packaging
 .Python
 env/
